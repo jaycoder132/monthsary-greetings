@@ -2,8 +2,6 @@
 
 A romantic surprise website to celebrate your monthsary with your girlfriend. Features a beautiful pink & white design, floating hearts animation, and auto-playing music.
 
-![Preview](https://via.placeholder.com/500x300/ffe4e6/db2777?text=Happy+Monthsary)
-
 ---
 
 ## ✨ Features
