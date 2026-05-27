@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Monthsary ❤️</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Click to Start Overlay -->
+    <div class="intro-screen" id="introScreen" onclick="startExperience()">
+        <div class="intro-content">
+            <div class="intro-heart">💕</div>
+            <h1>A Surprise for You</h1>
+            <p>Click anywhere to open</p>
+        </div>
+    </div>
+
+    <!-- Floating Hearts -->
+    <div class="hearts-container" id="hearts"></div>
+
+    <!-- Main Card -->
+    <div class="card" id="mainCard">
+        <div class="deco-heart">💕</div>
+        <h1>Happy Monthsary</h1>
+        
+        <div class="months-display" id="monthsCount">3</div>
+        <div class="months-label">Months ❤️</div>
+        
+        <p class="message">
+            Every moment with you has been a blessing. 
+            Thank you for being my favorite person, my love, 
+            and my greatest joy. Here's to many more months 
+            of love and laughter together! 🥰
+        </p>
+
+        <!-- Music Player (Hidden but plays) -->
+        <div class="music-player">
+            <label>🎵 DEVOTION </label>
+            <div class="music-controls">
+                <button class="play-btn" id="playBtn" onclick="toggleMusic()">
+                    <svg viewBox="0 0 24 24" id="playIcon">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                </button>
+                <span class="song-title" id="songTitle">Playing...</span>
+            </div>
+            <audio id="music" src="./songs/DEVOTION.mp3" autoplay></audio>
+        </div>
+
+        <div class="date-display">
+            📅 <span id="currentDate"></span>
+        </div>
+    </div>
+
+    <script>
+        // Set Current Date
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-US', options);
+
+        // Change months here
+        document.getElementById('monthsCount').textContent = '3';
+
+        // Audio element
+        const audio = document.getElementById('music');
+        let isPlaying = true;
+
+        // Start Experience (plays music + shows card)
+        function startExperience() {
+            const intro = document.getElementById('introScreen');
+            const card = document.getElementById('mainCard');
+            
+            // Hide intro
+            intro.style.opacity = '0';
+            intro.style.pointerEvents = 'none';
+            
+            // Play music
+            audio.play().catch(e => console.log('Autoplay blocked, using click fallback'));
+            
+            // Show card after short delay
+            setTimeout(() => {
+                card.classList.add('visible');
+            }, 300);
+        }
+
+        // Toggle Music
+        function toggleMusic() {
+            if (isPlaying) {
+                audio.pause();
+                document.getElementById('playIcon').innerHTML = '<path d="M8 5v14l11-7z"/>';
+                document.getElementById('playBtn').classList.remove('playing');
+                isPlaying = false;
+            } else {
+                audio.play();
+                document.getElementById('playIcon').innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+                document.getElementById('playBtn').classList.add('playing');
+                isPlaying = true;
+            }
+        }
+
+        // Floating Hearts Animation
+        function createHearts() {
+            const container = document.getElementById('hearts');
+            const heartSymbols = ['💗', '💖', '💕', '❤️', '💓'];
+            
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 6 + 's';
+                heart.style.animationDuration = (5 + Math.random() * 4) + 's';
+                container.appendChild(heart);
+            }
+        }
+
+        // Initialize hearts
+        createHearts();
+    </script>
+</body>
+</html>
